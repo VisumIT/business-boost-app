@@ -7,13 +7,13 @@
     android:background="@color/colorWhite"
     android:paddingLeft="32dp"
     android:paddingRight="32dp"
-    android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+    android:theme="@style/ThemeOverlay.AppCompat.Light"
     tools:context=".MainActivity">
 
     <LinearLayout
         android:id="@+id/image_login"
         android:layout_width="0dp"
-        android:layout_height="240dp"
+        android:layout_height="200dp"
 
         android:scaleType="centerInside"
         app:layout_constraintTop_toTopOf="parent"
@@ -37,7 +37,7 @@
     <EditText
         android:id="@+id/txt_login_email"
         android:layout_width="0dp"
-        android:layout_height="70dp"
+        android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/image_login"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -49,7 +49,7 @@
     <EditText
         android:id="@+id/txt_login_password"
         android:layout_width="0dp"
-        android:layout_height="70dp"
+        android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/txt_login_email"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -65,7 +65,7 @@
         app:layout_constraintTop_toBottomOf="@+id/txt_login_password"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:text="Entrar"
         android:background="@color/colorPrimary"
         android:textColor="@color/colorWhite" />
@@ -78,7 +78,7 @@
         app:layout_constraintTop_toBottomOf="@+id/btn_login"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:text="Esqueceu a senha?"
         android:theme="@style/Widget.AppCompat.Button.Borderless"
         android:background="@color/colorWhite"
@@ -116,14 +116,14 @@
        android:layout_marginTop="32dp" />
 
    <Button
-       android:id="@+id/btn_criar_conta"
+       android:id="@+id/btn_abrir_cadastro_representante"
        android:layout_width="0dp"
        android:layout_height="wrap_content"
        app:layout_constraintTop_toBottomOf="@+id/txt_ou"
        app:layout_constraintLeft_toLeftOf="parent"
        app:layout_constraintRight_toRightOf="parent"
        app:layout_constraintHorizontal_bias="1"
-       android:layout_marginTop="16dp"
+       android:layout_marginTop="8dp"
        android:text="Criar nova conta"
        android:background="@color/colorGreen"
        android:textColor="@color/colorWhite" />
