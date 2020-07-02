@@ -20,11 +20,6 @@ class MainActivity : AppCompatActivity(){
             startActivity(abrirCadastroRepresentanteActivity)
         }
 
-        btnLogin.setOnClickListener {
-            val abrirHome = Intent(this, HomeActivity::class.java)
-            startActivity(abrirHome)
-        }
-
     }
 
 }

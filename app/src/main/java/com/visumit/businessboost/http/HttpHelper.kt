@@ -1,13 +1,10 @@
 package com.visumit.businessboost.http
 
-import okhttp3.MediaType
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import okhttp3.RequestBody
+import okhttp3.*
 
 class HttpHelper {
 
-    fun post(json: String) : String {
+    fun post(json: String): Response? {
 
         val URl = "http://192.168.15.13:8080/representatives"
 
@@ -20,7 +17,7 @@ class HttpHelper {
         var request = Request.Builder().url(URl).post(body).build()
 
         val response = client.newCall(request).execute()
-
-        return response.body().toString()
+//        println("************* ${response.isSuccessful }")
+        return response
     }
 }
