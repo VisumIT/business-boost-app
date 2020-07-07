@@ -9,7 +9,6 @@
     tools:context=".CadastroRepresentanteActivity"
     android:padding="32dp">
 
-
     <TextView
         android:id="@+id/txt_cadastro_representante"
         android:layout_width="wrap_content"
@@ -21,24 +20,30 @@
         android:textSize="24sp"
         android:paddingBottom="16dp"/>
 
-    <EditText
-        android:id="@+id/txt_nome_completo"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/nome_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/txt_cadastro_representante"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        android:layout_marginTop="8dp"
-        android:hint="Digite seu nome completo"
-        android:inputType="textPersonName"
-        android:layout_marginBottom="4dp"/>
+        android:layout_marginTop="4dp"
+        android:hint="Nome"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txt_nome_completo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/email_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/txt_nome_completo"
+        app:layout_constraintTop_toBottomOf="@+id/nome_layout"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="4dp"
@@ -48,7 +53,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txt_email"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:inputType="textWebEmailAddress"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -66,65 +72,92 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/txt_cpf"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
-
-
-    <EditText
-        android:id="@+id/txt_data_nascimento"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/data_nascimento_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/cpf_layout"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        android:layout_marginTop="8dp"
-        android:hint="Digite sua data de nascimento"
-        android:inputType="date"
-        android:layout_marginBottom="4dp"/>
+        android:hint="Data Nascimento"
+        android:layout_marginTop="4dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-    <EditText
-        android:id="@+id/txt_senha_01"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txt_data_nascimento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="date"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/celular_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/txt_data_nascimento"
+        app:layout_constraintTop_toBottomOf="@+id/data_nascimento_layout"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        android:layout_marginTop="8dp"
-        android:hint="Digite uma senha"
-        android:inputType="textPassword"
-        android:layout_marginBottom="4dp"/>
-    <EditText
-        android:id="@+id/txt_senha_02"
+        android:hint="Celular"
+        android:layout_marginTop="4dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txt_celular"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/senha_01_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/txt_senha_01"
+        app:layout_constraintTop_toBottomOf="@+id/celular_layout"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        android:layout_marginTop="8dp"
-        android:hint="Digite novamente a senha"
-        android:inputType="textPassword"/>
-    <EditText
-        android:id="@+id/txt_celular"
+        android:hint="Senha"
+        android:layout_marginTop="4dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txt_senha_01"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textWebPassword"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/senha_02_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/txt_senha_02"
+        app:layout_constraintTop_toBottomOf="@+id/senha_01_layout"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        android:layout_marginTop="8dp"
-        android:hint="Digite seu Celular"
-        android:inputType="numberDecimal"/>
+        android:hint="Confirme a senha"
+        android:layout_marginTop="4dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/txt_senha_02"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textWebPassword"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/btn_gravar_representante"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/txt_celular"
+        app:layout_constraintTop_toBottomOf="@+id/senha_02_layout"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -132,7 +165,5 @@
         android:text="Criar nova conta"
         android:background="@color/colorGreen"
         android:textColor="@color/colorWhite" />
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

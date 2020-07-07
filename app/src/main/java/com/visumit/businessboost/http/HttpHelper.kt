@@ -4,9 +4,9 @@ import okhttp3.*
 
 class HttpHelper {
 
-    fun post(json: String): Response? {
+    fun post(json: String, endpoint: String): Response? {
 
-        val URl = "http://192.168.15.13:8080/representatives"
+        val URl = "http://192.168.15.13:8080/${endpoint}"
 
         val headerHttp = MediaType.parse("application/json; charset=utf-8")
 
