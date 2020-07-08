@@ -37,11 +37,11 @@ class MainActivity : AppCompatActivity(){
         btnLogin.setOnClickListener {
 
             var login = Login()
-            login.email = email.text.toString()
-            login.password = password.text.toString()
+//            login.email = email.text.toString()
+//            login.password = password.text.toString()
 
-//            login.email = "01@01.com"
-//            login.password = "12345678"
+            login.email = "06@06.com"
+            login.password = "123456789"
 
             if(login.email != "" && login.password != ""){
 
@@ -71,7 +71,7 @@ class MainActivity : AppCompatActivity(){
                             uiThread {
                                 val abrirApp = Intent(this@MainActivity, HomeActivity::class.java)
                                 startActivity(abrirApp)
-                                overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_in_left)
+                                overridePendingTransition(android.R.anim.slide_out_right, android.R.anim.slide_in_left)
                             }
                         }
                     }else{
