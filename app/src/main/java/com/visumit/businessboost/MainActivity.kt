@@ -2,15 +2,14 @@ package com.visumit.businessboost
 
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import com.google.gson.Gson
 import com.visumit.businessboost.http.HttpHelper
 import com.visumit.businessboost.model.Login
+import com.visumit.businessboost.model.RepresentanteResponse
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.longToast
 import org.jetbrains.anko.toast
@@ -51,10 +50,11 @@ class MainActivity : AppCompatActivity(){
                 doAsync {
 
                     var http = HttpHelper()
-                    var res = http.post(loginJson, "login")
+                    var res = http.post(loginJson, "login", null)
 
                     if (res != null) {
                         if (res.code() == 200) {
+
                             println(res)
                             println(res.headers().toString())
 
@@ -66,9 +66,22 @@ class MainActivity : AppCompatActivity(){
                             editor.putString("token", token.toString())
                             editor.putString("email", login.email)
                             editor.putString("password", login.password)
+
+
+                            val httpHelper = HttpHelper()
+                            var res = httpHelper.get("representatives/whois", "$token")
+
+
+
+                            val gson = Gson()
+                            var toOject = gson.fromJson(res?.body()?.string(), RepresentanteResponse::class.java)
+
+                            editor.putString("id", toOject.id.toString())
                             editor.commit()
 
                             uiThread {
+
+
                                 val abrirApp = Intent(this@MainActivity, HomeActivity::class.java)
                                 startActivity(abrirApp)
                                 overridePendingTransition(android.R.anim.slide_out_right, android.R.anim.slide_in_left)

@@ -13,6 +13,13 @@ class PreferenciesUsuario {
 
     }
 
+    fun getId(context: Context) : String? {
+
+        val preferences = context.getSharedPreferences("usuario", Context.MODE_PRIVATE)
+        return preferences.getString("id", "")
+
+    }
+
     fun getToken(context: Context) : String? {
 
         val preferences = context.getSharedPreferences("usuario", Context.MODE_PRIVATE)
