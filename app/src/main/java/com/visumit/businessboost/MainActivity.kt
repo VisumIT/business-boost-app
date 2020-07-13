@@ -39,8 +39,8 @@ class MainActivity : AppCompatActivity(){
 //            login.email = email.text.toString()
 //            login.password = password.text.toString()
 
-            login.email = "06@06.com"
-            login.password = "123456789"
+            login.email = "hasdf@teste.com"
+            login.password = "12345678"
 
             if(login.email != "" && login.password != ""){
 
@@ -111,6 +111,7 @@ class MainActivity : AppCompatActivity(){
             startActivity(abrirCadastroRepresentanteActivity)
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         }
+
 
     }
 
