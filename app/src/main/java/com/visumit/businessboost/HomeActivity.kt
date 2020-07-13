@@ -67,6 +67,9 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }else if(item.itemId == R.id.nav_imagem){
             var intent = Intent(this, UploadImageActivity::class.java)
             startActivity(intent)
+        }else if(item.itemId == R.id.nav_produtos){
+            var intent = Intent(this, ProductsActivity::class.java)
+            startActivity(intent)
         }
 
         drawerLayout.closeDrawer(GravityCompat.START)
