@@ -74,7 +74,7 @@ class MainActivity : AppCompatActivity(){
 
 
                             val gson = Gson()
-                            var toOject = gson.fromJson(res?.body()?.string(), RepresentanteResponse::class.java)
+                            var toOject = gson.fromJson(res.toString(), RepresentanteResponse::class.java)
 
                             editor.putString("id", toOject.id.toString())
                             editor.commit()
@@ -83,8 +83,9 @@ class MainActivity : AppCompatActivity(){
 
 
                                 val abrirApp = Intent(this@MainActivity, HomeActivity::class.java)
+//                                val abrirApp = Intent(this@MainActivity, ProductsActivity::class.java)
                                 startActivity(abrirApp)
-                                overridePendingTransition(android.R.anim.slide_out_right, android.R.anim.slide_in_left)
+//                                overridePendingTransition(android.R.anim.slide_out_right, android.R.anim.slide_in_left)
                             }
                         }
                     }else{

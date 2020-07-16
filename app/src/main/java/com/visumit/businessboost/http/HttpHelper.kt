@@ -29,21 +29,21 @@ class HttpHelper {
 
     }
 
-    fun get( endpoint: String, auth : String): Response? {
+    fun get( endpoint: String, auth : String): String? {
 
         val URl = "http://${IP_REQUEST}:8080/${endpoint}"
-
-        val headerHttp = MediaType.parse("application/json; charset=utf-8")
 
         val client = OkHttpClient()
 
 //        val body = RequestBody.create(headerHttp, json)
 
-        var request = Request.Builder().url(URl).method("GET", null).addHeader("Authorization", auth).build()
+        var request = Request.Builder().url(URl).get().addHeader("Authorization", auth).build()
 
         val response = client.newCall(request).execute()
-//        println("************* ${response.isSuccessful }")
-        return response
+
+        println("************* ${response.isSuccessful }")
+
+        return response.body()?.string()
     }
 
     fun patch(json: String, endpoint: String, auth: String?): Response? {

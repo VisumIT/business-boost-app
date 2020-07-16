@@ -1,151 +1,178 @@
 package com.visumit.businessboost.model;
 
 public class Product {
-    private int id;
+    private float id;
     private String name;
-    private double price;
-    private double discount;
+    private float price;
+    private float discount;
     private String brand;
+    private float discontPrice;
+    private float totalPrice;
     private String category;
     private String reference;
     private String deliveryTime;
     private String imagesUrl;
-    private int sold;
+    private float sold;
     private String status;
     ProductInformation ProductInformationObject;
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
+    // Getter Methods
+
+    public float getId() {
+        return id;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public double getPrice() {
+    public float getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public double getDiscount() {
+    public float getDiscount() {
         return discount;
-    }
-
-    public void setDiscount(double discount) {
-        this.discount = discount;
     }
 
     public String getBrand() {
         return brand;
     }
 
-    public void setBrand(String brand) {
-        this.brand = brand;
+    public float getDiscontPrice() {
+        return discontPrice;
+    }
+
+    public float getTotalPrice() {
+        return totalPrice;
     }
 
     public String getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
     public String getReference() {
         return reference;
-    }
-
-    public void setReference(String reference) {
-        this.reference = reference;
     }
 
     public String getDeliveryTime() {
         return deliveryTime;
     }
 
-    public void setDeliveryTime(String deliveryTime) {
-        this.deliveryTime = deliveryTime;
-    }
-
     public String getImagesUrl() {
         return imagesUrl;
     }
 
-    public void setImagesUrl(String imagesUrl) {
-        this.imagesUrl = imagesUrl;
-    }
-
-    public int getSold() {
+    public float getSold() {
         return sold;
-    }
-
-    public void setSold(int sold) {
-        this.sold = sold;
     }
 
     public String getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public ProductInformation getProductInformationObject() {
+    public ProductInformation getProductInformation() {
         return ProductInformationObject;
     }
 
-    public void setProductInformationObject(ProductInformation productInformationObject) {
-        ProductInformationObject = productInformationObject;
-    }
+    // Setter Methods
 
-    @Override
-    public String toString() {
-        return "Product{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", price=" + price +
-                ", discount=" + discount +
-                ", brand='" + brand + '\'' +
-                ", category='" + category + '\'' +
-                ", reference='" + reference + '\'' +
-                ", deliveryTime='" + deliveryTime + '\'' +
-                ", imagesUrl='" + imagesUrl + '\'' +
-                ", sold=" + sold +
-                ", status='" + status + '\'' +
-                ", ProductInformationObject=" + ProductInformationObject +
-                '}';
-    }
-
-    public Product(int id, String name, double price, double discount, String brand, String category, String reference, String deliveryTime, String imagesUrl, int sold, String status, ProductInformation productInformationObject) {
+    public void setId( float id ) {
         this.id = id;
+    }
+
+    public void setName( String name ) {
         this.name = name;
+    }
+
+    public void setPrice( float price ) {
         this.price = price;
+    }
+
+    public void setDiscount( float discount ) {
         this.discount = discount;
-        this.brand = brand;
-        this.category = category;
-        this.reference = reference;
-        this.deliveryTime = deliveryTime;
-        this.imagesUrl = imagesUrl;
-        this.sold = sold;
-        this.status = status;
-        ProductInformationObject = productInformationObject;
     }
 
-    public Product(int id, String name, double price) {
+    public void setBrand( String brand ) {
+        this.brand = brand;
+    }
+
+    public void setDiscontPrice( float discontPrice ) {
+        this.discontPrice = discontPrice;
+    }
+
+    public void setTotalPrice( float totalPrice ) {
+        this.totalPrice = totalPrice;
+    }
+
+    public void setCategory( String category ) {
+        this.category = category;
+    }
+
+    public void setReference( String reference ) {
+        this.reference = reference;
+    }
+
+    public void setDeliveryTime( String deliveryTime ) {
+        this.deliveryTime = deliveryTime;
+    }
+
+    public void setImagesUrl( String imagesUrl ) {
+        this.imagesUrl = imagesUrl;
+    }
+
+    public void setSold( float sold ) {
+        this.sold = sold;
+    }
+
+    public void setStatus( String status ) {
+        this.status = status;
+    }
+
+    public void setProductInformation( ProductInformation productInformationObject ) {
+        this.ProductInformationObject = productInformationObject;
+    }
+}
+class ProductInformation {
+    private float id;
+    private float stock;
+    private String size;
+    private String color;
+
+
+    // Getter Methods
+
+    public float getId() {
+        return id;
+    }
+
+    public float getStock() {
+        return stock;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    // Setter Methods
+
+    public void setId( float id ) {
         this.id = id;
-        this.name = name;
-        this.price = price;
+    }
+
+    public void setStock( float stock ) {
+        this.stock = stock;
+    }
+
+    public void setSize( String size ) {
+        this.size = size;
+    }
+
+    public void setColor( String color ) {
+        this.color = color;
     }
 }
