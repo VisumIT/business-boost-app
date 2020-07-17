@@ -12,7 +12,8 @@
         android:roundIcon="@color/colorPrimary"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ProductsActivity"></activity>
+        <activity android:name=".SelectCompanyActivity"></activity>
+        <activity android:name=".ProductsActivity" />
         <activity android:name=".HomeActivity" />
         <activity android:name=".CadastroRepresentanteActivity" />
         <activity android:name=".MainActivity">

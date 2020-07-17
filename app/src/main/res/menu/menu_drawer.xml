@@ -9,6 +9,8 @@
         <item android:id="@+id/nav_produtos" android:title="Produtos" />
 
         <item android:id="@+id/nav_pedidos" android:title="Pedidos" />
+
+        <item android:id="@+id/nav_companies" android:title="Empresas" />
     </group>
 
     <item android:id="@+id/nav_imagem" android:title="Alterar Imagem" />

@@ -62,14 +62,22 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onNavigationItemSelected(item : MenuItem): Boolean {
 
-        if (item.itemId == R.id.nav_home){
-            toast("Home Teste")
-        }else if(item.itemId == R.id.nav_imagem){
-            var intent = Intent(this, UploadImageActivity::class.java)
-            startActivity(intent)
-        }else if(item.itemId == R.id.nav_produtos){
-            var intent = Intent(this, ProductsActivity::class.java)
-            startActivity(intent)
+        when (item.itemId) {
+            R.id.nav_home -> {
+                toast("Home Teste")
+            }
+            R.id.nav_imagem -> {
+                var intent = Intent(this, UploadImageActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.nav_produtos -> {
+                var intent = Intent(this, ProductsActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.nav_companies -> {
+                var intent = Intent(this, SelectCompanyActivity::class.java)
+                startActivity(intent)
+            }
         }
 
         drawerLayout.closeDrawer(GravityCompat.START)

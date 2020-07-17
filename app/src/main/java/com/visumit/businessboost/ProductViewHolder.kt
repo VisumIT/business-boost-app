@@ -1,5 +1,6 @@
 package com.visumit.businessboost
 
+import android.content.Context
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
@@ -10,7 +11,7 @@ import com.visumit.businessboost.model.Product
 import java.lang.String.format
 import java.text.DecimalFormat
 
-class ProductViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener  {
+class ProductViewHolder(view: View) : RecyclerView.ViewHolder(view){
 
     private val textViewPrice = itemView.findViewById<TextView>(R.id.product_price)
     private val textViewName = itemView.findViewById<TextView>(R.id.product_name)
@@ -24,7 +25,6 @@ class ProductViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClic
 
         }else{
             Picasso.get().load(R.mipmap.boost_icon)
-
         }
 
         textViewPrice.text = "R$ " + item.price.toString()
@@ -34,12 +34,12 @@ class ProductViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClic
         var priceDiscount = item.price * (item.discount / 100 - 1) * -1
         textViewPriceDiscount.text = "R$ " + priceDiscount.toString()
 
-        btnAddProduct.setOnClickListener(this)
-    }
 
-    override fun onClick(v: View?) {
-       print("tambem")
-    }
 
+
+        btnAddProduct.setOnClickListener {
+
+        }
+    }
 
 }
