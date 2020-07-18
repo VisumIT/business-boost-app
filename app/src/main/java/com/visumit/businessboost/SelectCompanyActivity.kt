@@ -1,7 +1,11 @@
 package com.visumit.businessboost
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
@@ -16,6 +20,7 @@ class SelectCompanyActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
     private val companyAdapter = CompanyAdapter()
+    private lateinit var toolbar: Toolbar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,6 +28,11 @@ class SelectCompanyActivity : AppCompatActivity() {
 
         val preferences = PreferenciesUsuario()
         var token = preferences.getToken(this)
+
+        toolbar = findViewById(R.id.toobar)
+        toolbar.title = "Empresas"
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         recyclerView = findViewById(R.id.recyclerViewCompanys)
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -37,6 +47,24 @@ class SelectCompanyActivity : AppCompatActivity() {
 
             uiThread {
                 companyAdapter.updateItems(listCompany)
+            }
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_pular, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            R.id.menu_pular -> {
+                val intent = Intent(this, HomeActivity::class.java)
+                startActivity(intent)
+                true
+            }
+            else -> {
+                false
             }
         }
     }
