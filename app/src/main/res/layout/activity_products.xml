@@ -8,12 +8,13 @@
     android:orientation="vertical"
     tools:context=".ProductsActivity">
 
+    <include layout="@layout/toolbar" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewProdutos"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/activity_products"
-        android:padding="8dp"/>
+        android:padding="8dp" />
 
 </LinearLayout>

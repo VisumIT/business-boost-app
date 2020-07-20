@@ -2,6 +2,7 @@ package com.visumit.businessboost
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
@@ -16,10 +17,16 @@ class ProductsActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
     private val productAdapter = ProductAdapter()
+    private lateinit var toolbar: Toolbar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_products)
+
+        toolbar = findViewById(R.id.toobar)
+        toolbar.title = "Lista de Produtos"
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val preferences = PreferenciesUsuario()
         var token = preferences.getToken(this)
@@ -28,14 +35,6 @@ class ProductsActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.recyclerViewProdutos)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = productAdapter
-
-//        val products = listOf<Product>(
-//            Product(1, "Teste", 16.00, 10.00),
-//            Product(2, "Teste", 17.00, 10.00),
-//            Product(3, "Teste", 18.00, 10.00),
-//            Product(4, "Teste", 19.00, 10.00),
-//            Product(5, "Teste", 20.00, 10.00)
-//        )
 
         doAsync {
 
@@ -48,9 +47,6 @@ class ProductsActivity : AppCompatActivity() {
                 productAdapter.updateItems(listProducts)
             }
         }
-
-//        productAdapter.updateItems(products)
-
     }
 
     private fun fromJsonArrayListProduct(json: String): ArrayList<Product> {

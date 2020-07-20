@@ -30,6 +30,8 @@ class CompanyViewHolder(view: View) : RecyclerView.ViewHolder(view){
         companyName.text = item.companyName
         companyCity.text = item.city
 
+
+
     }
 
 }

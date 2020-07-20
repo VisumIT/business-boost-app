@@ -28,7 +28,7 @@ class ProductAdapter : RecyclerView.Adapter<ProductViewHolder>() {
 
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
-        holder.bind(items[position])
+        holder.bind(items[position], holder.itemView.context)
     }
 
 }

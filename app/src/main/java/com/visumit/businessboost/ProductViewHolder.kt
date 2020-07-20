@@ -1,6 +1,7 @@
 package com.visumit.businessboost
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
@@ -8,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.visumit.businessboost.model.Product
+import com.visumit.businessboost.utils.PreferenciesUsuario
 import java.lang.String.format
 import java.text.DecimalFormat
 
@@ -19,7 +21,7 @@ class ProductViewHolder(view: View) : RecyclerView.ViewHolder(view){
     private val btnAddProduct = itemView.findViewById<Button>(R.id.btn_add_product)
     private  val imageProduct: ImageView = itemView.findViewById(R.id.product_img)
 
-    fun bind(item: Product) {
+    fun bind(item: Product, context: Context) {
         if (item.imagesUrl != "" && item.imagesUrl != null){
             Picasso.get().load(item.imagesUrl).into(imageProduct)
 
@@ -38,7 +40,8 @@ class ProductViewHolder(view: View) : RecyclerView.ViewHolder(view){
 
 
         btnAddProduct.setOnClickListener {
-
+            val preferences = PreferenciesUsuario()
+            var token = preferences.getToken(context)
         }
     }
 

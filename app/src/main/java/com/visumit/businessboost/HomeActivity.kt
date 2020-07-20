@@ -42,8 +42,6 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         navigationView.setNavigationItemSelectedListener(this)
 
 
-
-
 //        var imageViewNav : ImageButton = findViewById(R.id.imageViewNav)
 //
 //        imageViewNav.setOnClickListener {
