@@ -8,7 +8,6 @@
     tools:context=".UploadImageActivity"
     android:orientation="vertical">
 
-    <include layout="@layout/toolbar" />
 
     <ImageView
         android:id="@+id/imageFoto"

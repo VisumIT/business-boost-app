@@ -8,7 +8,6 @@
     tools:context=".SelectCompanyActivity"
     android:orientation="vertical">
 
-    <include layout="@layout/toolbar"></include>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewCompanys"

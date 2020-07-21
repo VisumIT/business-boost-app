@@ -8,14 +8,13 @@ import android.provider.MediaStore
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.core.graphics.drawable.toBitmap
 import com.google.gson.Gson
 import com.visumit.businessboost.http.HttpHelper
 import com.visumit.businessboost.model.ImageUrl
 import com.visumit.businessboost.model.Imagem
-import com.visumit.businessboost.utils.PreferenciesUsuario
+import com.visumit.businessboost.utils.UserPreferences
 import com.visumit.businessboost.utils.bitmapToBase64
 import kotlinx.android.synthetic.main.activity_upload_image.*
 import org.jetbrains.anko.doAsync
@@ -38,11 +37,11 @@ class UploadImageActivity : AppCompatActivity() {
         setContentView(R.layout.activity_upload_image)
 
         // Pegando token para realizar requisiçoes
-        val preferences = PreferenciesUsuario()
+        val preferences = UserPreferences()
         var token = preferences.getToken(this)
         var id = preferences.getId(this)
 
-        toolbar = findViewById(R.id.toobar)
+        toolbar = findViewById(R.id.toolbar)
         toolbar.title = "Cadastrar Foto"
         setSupportActionBar(toolbar)
 

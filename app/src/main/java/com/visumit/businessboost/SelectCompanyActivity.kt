@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 import com.visumit.businessboost.http.HttpHelper
 import com.visumit.businessboost.model.Company
-import com.visumit.businessboost.utils.PreferenciesUsuario
+import com.visumit.businessboost.utils.UserPreferences
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import org.json.JSONArray
@@ -26,10 +26,10 @@ class SelectCompanyActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_select_company)
 
-        val preferences = PreferenciesUsuario()
+        val preferences = UserPreferences()
         var token = preferences.getToken(this)
 
-        toolbar = findViewById(R.id.toobar)
+        toolbar = findViewById(R.id.toolbar)
         toolbar.title = "Empresas"
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)

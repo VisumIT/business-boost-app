@@ -3,7 +3,7 @@ package com.visumit.businessboost.utils
 import android.content.Context
 import android.content.SharedPreferences
 
-class PreferenciesUsuario {
+class UserPreferences {
 
 
     fun getEmail(context: Context) : String? {

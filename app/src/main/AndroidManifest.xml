@@ -13,28 +13,37 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".MainActivity" android:launchMode="singleTop">
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SelectCompanyActivity" android:parentActivityName=".HomeActivity">
+        <activity
+            android:name=".SelectCompanyActivity"
+            android:parentActivityName=".HomeActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".HomeActivity">
 
             </meta-data>
         </activity>
-        <activity android:name=".ProductsActivity" android:parentActivityName=".HomeActivity">
+        <activity
+            android:name=".ProductsActivity"
+            android:parentActivityName=".HomeActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".HomeActivity">
 
             </meta-data>
         </activity>
-        <activity android:name=".HomeActivity" />
+        <activity
+            android:name=".HomeActivity"
+            android:launchMode="singleTop"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".CadastroRepresentanteActivity" />
 
         <activity
@@ -43,10 +52,8 @@
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".HomeActivity" >
-            </meta-data>
+                android:value=".HomeActivity"></meta-data>
         </activity>
-
 
 
     </application>

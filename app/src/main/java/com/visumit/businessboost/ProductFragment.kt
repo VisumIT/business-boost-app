@@ -1,7 +1,11 @@
 package com.visumit.businessboost
 
+import android.content.Context
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
@@ -12,23 +16,23 @@ import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import org.json.JSONArray
 
-class ProductsActivity : AppCompatActivity() {
+class ProductFragment : Fragment() {
 
-    private lateinit var recyclerView: RecyclerView
+    private val userPreferences = UserPreferences()
     private val productAdapter = ProductAdapter()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.fragment_product)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
-//        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        val view : View = inflater.inflate(R.layout.fragment_product, container, false)
+        val activity = activity as Context
+        val token = userPreferences.getToken(activity)
 
-        val preferences = UserPreferences()
-        var token = preferences.getToken(this)
-
-
-        recyclerView = findViewById(R.id.recycler_view_products)
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        var recyclerView: RecyclerView = view.findViewById(R.id.recycler_view_products)
+        recyclerView.layoutManager = LinearLayoutManager(activity)
         recyclerView.adapter = productAdapter
 
         doAsync {
@@ -42,7 +46,11 @@ class ProductsActivity : AppCompatActivity() {
                 productAdapter.updateItems(listProducts)
             }
         }
+
+        return view
+
     }
+
 
     private fun fromJsonArrayListProduct(json: String): ArrayList<Product> {
         var products = ArrayList<Product>()
@@ -56,4 +64,5 @@ class ProductsActivity : AppCompatActivity() {
         }
         return products
     }
+
 }

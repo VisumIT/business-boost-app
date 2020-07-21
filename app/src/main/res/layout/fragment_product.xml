@@ -5,16 +5,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".ProductsActivity">
-
-    <include layout="@layout/toolbar" />
+    android:orientation="vertical">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewProdutos"
+        android:id="@+id/recycler_view_products"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:listitem="@layout/activity_products"
-        android:padding="8dp"/>
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/item_product"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="4dp"/>
 
 </LinearLayout>
