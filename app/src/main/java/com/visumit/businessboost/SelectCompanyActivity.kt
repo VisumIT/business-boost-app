@@ -29,10 +29,11 @@ class SelectCompanyActivity : AppCompatActivity() {
         val preferences = UserPreferences()
         var token = preferences.getToken(this)
 
-        toolbar = findViewById(R.id.toolbar)
-        toolbar.title = "Empresas"
+        toolbar = findViewById(R.id.toolbar_generic)
+        toolbar.title = "Selecione uma Empresa"
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        window.statusBarColor = getColor(R.color.colorPrimaryDark)
 
         recyclerView = findViewById(R.id.recyclerViewCompanys)
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -59,7 +60,7 @@ class SelectCompanyActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId){
             R.id.menu_pular -> {
-                val intent = Intent(this, HomeActivity::class.java)
+                val intent = Intent(this, LoginActivity::class.java)
                 startActivity(intent)
                 true
             }

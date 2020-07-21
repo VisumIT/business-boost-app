@@ -1,45 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UploadImageActivity"
-    android:orientation="vertical">
+    tools:context=".UploadImageActivity">
 
+    <include layout="@layout/toolbar"></include>
 
-    <ImageView
-        android:id="@+id/imageFoto"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="198dp"
-        android:background="@color/colorPrimary">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    </ImageView>
+        <ImageView
+            android:id="@+id/imageFoto"
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:background="@color/colorPrimary"
+            android:layout_marginTop="?attr/actionBarSize">
 
-    <ImageButton
-        android:id="@+id/selecionar_imagem"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:background="@mipmap/ic_launcher"
-        android:layout_marginTop="-32dp"
-        android:layout_gravity="center_horizontal"/>
+        </ImageView>
 
-    <EditText
-        android:id="@+id/edit_nome_imagem"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:layout_margin="16dp"
-        android:inputType="text"/>
+        <ImageButton
+            android:id="@+id/selecionar_imagem"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:background="@mipmap/ic_location_round"
+            android:layout_marginTop="-32dp"
+            android:layout_gravity="center_horizontal"/>
 
-    <Button
-        android:id="@+id/btn_salvar_imagem"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Salvar"
-        android:layout_gravity="center_horizontal">
+        <EditText
+            android:id="@+id/edit_nome_imagem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:layout_margin="16dp"
+            android:inputType="text"
+            android:hint="Degite um nome"/>
 
-    </Button>
+<!--        <Button-->
+<!--            android:id="@+id/btn_salvar_imagem"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Salvar"-->
+<!--            android:layout_gravity="center_horizontal">-->
 
-</LinearLayout>
+<!--        </Button>-->
+    </LinearLayout>
+
+
+
+</RelativeLayout>

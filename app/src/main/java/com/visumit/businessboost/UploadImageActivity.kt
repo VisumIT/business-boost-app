@@ -1,10 +1,13 @@
 package com.visumit.businessboost
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Bitmap
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -31,6 +34,8 @@ class UploadImageActivity : AppCompatActivity() {
     private lateinit var bitmap : Bitmap
     private lateinit var imageView: ImageView
     private lateinit var toolbar: Toolbar
+    private lateinit var token: String
+    private lateinit var id: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,16 +43,18 @@ class UploadImageActivity : AppCompatActivity() {
 
         // Pegando token para realizar requisiçoes
         val preferences = UserPreferences()
-        var token = preferences.getToken(this)
-        var id = preferences.getId(this)
+        token = preferences.getToken(this).toString()
+        id = preferences.getId(this).toString()
 
-        toolbar = findViewById(R.id.toolbar)
+        toolbar = findViewById(R.id.toolbar_generic)
         toolbar.title = "Cadastrar Foto"
         setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        window.statusBarColor = getColor(R.color.colorPrimaryDark)
 
 
         imageButton = findViewById(R.id.selecionar_imagem)
-        imageSalvar = findViewById(R.id.btn_salvar_imagem)
+//        imageSalvar = findViewById(R.id.btn_salvar_imagem)
 
         imageView = findViewById(R.id.imageFoto)
 
@@ -55,8 +62,25 @@ class UploadImageActivity : AppCompatActivity() {
             escolherFoto()
         }
 
-        imageSalvar.setOnClickListener {
-            enviarFoto(token, id)
+//        imageSalvar.setOnClickListener {
+//            enviarFoto(token, id)
+//        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_salvar, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            R.id.nav_save -> {
+                enviarFoto(token, id)
+                true
+            }
+            else -> {
+                false
+            }
         }
     }
 
@@ -71,7 +95,7 @@ class UploadImageActivity : AppCompatActivity() {
         val random = Random()
         val imagem = Imagem()
 //        imagem.fileName = (100000..100000000000).random().toString() + ".jpeg"
-        imagem.fileName = "teste.jpeg"
+        imagem.fileName = "mobile.jpeg"
         imagem.mimetype = "image/jpeg"
         imagem.base64 = bitmapToBase64(imageFoto.drawable.toBitmap())
 
@@ -89,7 +113,7 @@ class UploadImageActivity : AppCompatActivity() {
 
                 uiThread {
                     toast("Imagem cadastrada com sucesso!")
-                    val intent = Intent(this@UploadImageActivity , HomeActivity::class.java)
+                    val intent = Intent(this@UploadImageActivity , MainActivity::class.java)
                     startActivity(intent)
                 }
 

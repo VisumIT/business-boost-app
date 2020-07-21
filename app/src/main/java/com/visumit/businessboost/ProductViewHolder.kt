@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.visumit.businessboost.model.Product
 import com.visumit.businessboost.utils.UserPreferences
+import org.jetbrains.anko.toast
 
 class ProductViewHolder(view: View) : RecyclerView.ViewHolder(view){
 
@@ -39,6 +40,8 @@ class ProductViewHolder(view: View) : RecyclerView.ViewHolder(view){
         btnAddProduct.setOnClickListener {
             val preferences = UserPreferences()
             var token = preferences.getToken(context)
+
+            context.toast("Produto adicionado ao carrinho")
         }
     }
 

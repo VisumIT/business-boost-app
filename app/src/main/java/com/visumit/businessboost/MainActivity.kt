@@ -1,118 +1,96 @@
 package com.visumit.businessboost
 
-import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import com.google.gson.Gson
-import com.visumit.businessboost.http.HttpHelper
-import com.visumit.businessboost.model.Login
-import com.visumit.businessboost.model.RepresentanteResponse
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.longToast
+import android.view.MenuItem
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import com.google.android.material.navigation.NavigationView
 import org.jetbrains.anko.toast
-import org.jetbrains.anko.uiThread
 
-class MainActivity : AppCompatActivity(){
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
-    private lateinit var btnLogin : Button
-    private lateinit var btnEsqueceuSenha : Button
-    private lateinit var btnAbrirCadastroRepresentante : Button
+    private lateinit var drawer: DrawerLayout
+    private lateinit var toolbar: Toolbar
+    private lateinit var toggle: ActionBarDrawerToggle
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val email = findViewById<EditText>(R.id.txt_login_email)
-        val password = findViewById<EditText>(R.id.txt_login_password)
+        toolbar = findViewById(R.id.toolbar)
+        toolbar.title = "Home"
+        setSupportActionBar(toolbar)
 
+        drawer = findViewById(R.id.drawer_layout)
 
-        btnLogin = findViewById(R.id.btn_login)
-        btnEsqueceuSenha = findViewById(R.id.btn_esqueceu_senha)
-        btnAbrirCadastroRepresentante = findViewById(R.id.btn_abrir_cadastro_representante)
+        val navigationView: NavigationView = findViewById(R.id.nav_view)
+        navigationView.setNavigationItemSelectedListener(this)
 
-        btnLogin.setOnClickListener {
+        toggle = ActionBarDrawerToggle(
+            this,
+            drawer,
+            toolbar,
+            R.string.navigation_drawer_open,
+            R.string.navigation_drawer_close
+        )
+        drawer.addDrawerListener(toggle)
+        toggle.syncState()
 
-            var login = Login()
-//            login.email = email.text.toString()
-//            login.password = password.text.toString()
-
-            login.email = "06@06.com"
-            login.password = "123456789"
-
-            if(login.email != "" && login.password != ""){
-
-                var gson = Gson()
-                var loginJson = gson.toJson(login)
-
-                doAsync {
-
-                    var http = HttpHelper()
-                    var res = http.post(loginJson, "login", null)
-
-                    if (res != null) {
-                        if (res.code() == 200) {
-
-                            println(res)
-                            println(res.headers().toString())
-
-                            val token = res.header("Authorization")
-
-                            var sharedPref = getSharedPreferences("usuario", Context.MODE_PRIVATE)
-                            var editor = sharedPref.edit()
-
-                            editor.putString("token", token.toString())
-                            editor.putString("email", login.email)
-                            editor.putString("password", login.password)
-
-
-                            val httpHelper = HttpHelper()
-                            var res = httpHelper.get("representatives/whois", "$token")
-
-
-
-                            val gson = Gson()
-                            var toOject = gson.fromJson(res.toString(), RepresentanteResponse::class.java)
-
-                            editor.putString("id", toOject.id.toString())
-                            editor.commit()
-
-                            uiThread {
-
-
-                                val abrirApp = Intent(this@MainActivity, HomeActivity::class.java)
-//                                val abrirApp = Intent(this@MainActivity, ProductsActivity::class.java)
-                                startActivity(abrirApp)
-//                                overridePendingTransition(android.R.anim.slide_out_right, android.R.anim.slide_in_left)
-                            }
-                        }
-                    }else{
-                        uiThread {
-                            toast("dados invalidos")
-                        }
-                    }
-                }
-
-
-
-            }else{
-
-                toast("Digite seu email e senha!")
-            }
-        }
-
-        btnEsqueceuSenha.setOnClickListener {
-            longToast("Em construçao")
-        }
-
-        btnAbrirCadastroRepresentante.setOnClickListener {
-            val abrirCadastroRepresentanteActivity = Intent(this, CadastroRepresentanteActivity::class.java)
-            startActivity(abrirCadastroRepresentanteActivity)
-            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+        if (savedInstanceState == null){
+            supportFragmentManager.beginTransaction().replace(R.id.fragment_container, HomeFragment()).commit()
+            navigationView.setCheckedItem(R.id.nav_home)
         }
 
     }
 
+    override fun onBackPressed() {
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START)
+
+        } else {
+            super.onBackPressed()
+        }
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+
+        when (item.itemId) {
+            R.id.nav_home -> {
+                toolbar.title = "Home"
+                setSupportActionBar(toolbar)
+                supportFragmentManager.beginTransaction().replace(R.id.fragment_container, HomeFragment()).commit()
+            }
+            R.id.nav_products -> {
+                toolbar.title = "Produtos"
+                setSupportActionBar(toolbar)
+                supportFragmentManager.beginTransaction().replace(R.id.fragment_container, ProductFragment()).commit()
+            }
+            R.id.nav_companies -> {
+                toast("Companies")
+            }
+            R.id.nav_image -> {
+                var intent = Intent(this, UploadImageActivity::class.java)
+                startActivity(intent)
+            }
+        }
+
+        toggle = ActionBarDrawerToggle(
+            this,
+            drawer,
+            toolbar,
+            R.string.navigation_drawer_open,
+            R.string.navigation_drawer_close
+        )
+        drawer.addDrawerListener(toggle)
+        toggle.syncState()
+
+
+
+        drawer.closeDrawer(GravityCompat.START)
+        return true
+    }
 }

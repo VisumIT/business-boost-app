@@ -1,9 +1,13 @@
 package com.visumit.businessboost
 
+import android.annotation.SuppressLint
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import androidx.annotation.RequiresApi
+import androidx.appcompat.widget.Toolbar
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.google.gson.Gson
@@ -20,10 +24,18 @@ class CadastroRepresentanteActivity : AppCompatActivity() {
     private lateinit var layoutSenha01 : TextInputLayout
     private lateinit var layoutSenha02 : TextInputLayout
     private lateinit var btnGravar : Button
+    private lateinit var toolbar: Toolbar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cadastro_representante)
+
+        toolbar = findViewById(R.id.toolbar_cadastro_representante)
+        toolbar.title = "Cadastro de Representante"
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        window.statusBarColor = getColor(R.color.colorPrimaryDark)
+
 
         // edit texts
         val editTextNomeCompleto = findViewById<TextInputEditText>(R.id.txt_nome_completo)
@@ -76,9 +88,9 @@ class CadastroRepresentanteActivity : AppCompatActivity() {
 
                             uiThread {
                                 toast("Cadastrado realizado com sucesso!")
-                                val abrirLogin  = Intent(this@CadastroRepresentanteActivity, MainActivity::class.java)
-                                startActivity(abrirLogin)
-                                overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_in_left)
+                                val selecionarEmpresa  = Intent(this@CadastroRepresentanteActivity, SelectCompanyActivity::class.java)
+                                startActivity(selecionarEmpresa)
+//                                overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_in_left)
 
                             }
                         }
@@ -102,9 +114,6 @@ class CadastroRepresentanteActivity : AppCompatActivity() {
                     }
                 }
             }
-
-
-
         }
     }
 }
