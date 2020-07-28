@@ -1,12 +1,9 @@
 package com.visumit.businessboost
 
-import android.annotation.SuppressLint
 import android.content.Intent
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.Toolbar
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -15,6 +12,8 @@ import com.visumit.businessboost.http.HttpHelper
 import com.visumit.businessboost.model.Message
 import com.visumit.businessboost.model.Number
 import com.visumit.businessboost.model.Representante
+import com.visumit.businessboost.utils.FormValidationUtil
+import com.visumit.businessboost.utils.Mask
 import org.jetbrains.anko.*
 
 class CadastroRepresentanteActivity : AppCompatActivity() {
@@ -23,6 +22,7 @@ class CadastroRepresentanteActivity : AppCompatActivity() {
     private lateinit var layoutCpf : TextInputLayout
     private lateinit var layoutSenha01 : TextInputLayout
     private lateinit var layoutSenha02 : TextInputLayout
+    private lateinit var layoutCelular : TextInputLayout
     private lateinit var btnGravar : Button
     private lateinit var toolbar: Toolbar
 
@@ -51,10 +51,16 @@ class CadastroRepresentanteActivity : AppCompatActivity() {
         layoutCpf = findViewById(R.id.cpf_layout)
         layoutSenha01 = findViewById(R.id.senha_01_layout)
         layoutSenha02 = findViewById(R.id.senha_02_layout)
+        layoutCelular = findViewById(R.id.celular_layout)
 
+        editTextCpf.addTextChangedListener(Mask.mask("###.###.###-##", editTextCpf))
+        editTextCelular.addTextChangedListener(Mask.mask("(##) # ####-####", editTextCelular))
+        editTextDataNascimento.addTextChangedListener(Mask.mask("##/##/####", editTextDataNascimento))
         btnGravar = findViewById(R.id.btn_gravar_representante)
 
         btnGravar.setOnClickListener {
+
+            var dataNascimento = editTextDataNascimento.text.toString().split("/")
 
             val phones = Number()
             phones.number = editTextCelular.text.toString()
@@ -63,16 +69,33 @@ class CadastroRepresentanteActivity : AppCompatActivity() {
             representante.name = editTextNomeCompleto.text.toString()
             representante.email = editTextEmail.text.toString()
             representante.cpf = editTextCpf.text.toString()
-            representante.dateOfBirth = editTextDataNascimento.text.toString()
+            representante.dateOfBirth = "${dataNascimento[2]}-${dataNascimento[1]}-${dataNascimento[0]}"
             representante.phones.add(phones)
 
             var error = false
 
-            if(editTextSenha01.text.toString() != editTextSenha02.text.toString()){
+            if(!FormValidationUtil.myVadidateCelular(editTextCelular.text.toString())){
+                layoutCelular.error = "Numero invalido"
+                error = true
+            }else{
+                layoutCelular.isErrorEnabled = false
+            }
+
+            if(!FormValidationUtil.myValidateCPF(editTextCpf.text.toString())) {
+                layoutCpf.error = "CPF invalido"
+                error = true
+            }else{
+                layoutCpf.isErrorEnabled = false
+            }
+            if(editTextSenha01.text.toString() != editTextSenha02.text.toString()) {
                 layoutSenha01.error = "Senhas nao corresponde"
                 layoutSenha02.error = "Senhas nao corresponde"
                 error = true
             }else{
+                layoutSenha01.isErrorEnabled = false
+                layoutSenha02.isErrorEnabled = false
+            }
+            if(!error){
                 representante.password = editTextSenha01.text.toString()
 
                 var gson = Gson()
@@ -101,14 +124,14 @@ class CadastroRepresentanteActivity : AppCompatActivity() {
                                 layoutEmail.error = "E-mail ja esta em uso"
                                 error = true
                             }else{
-                                layoutEmail.error = ""
+                                layoutEmail.isErrorEnabled = false
                             }
 
                             if (message.message == "CPF allready in use"){
                                 layoutCpf.error = "CPF ja cadastrado"
                                 error = true
                             }else{
-                                layoutCpf.error = ""
+                                layoutCpf.isErrorEnabled = false
                             }
                         }
                     }
