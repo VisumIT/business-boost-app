@@ -7,6 +7,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
+import com.visumit.businessboost.database.CarrinhoDatabase
+import com.visumit.businessboost.database.inserir
+import com.visumit.businessboost.model.Carrinho
 import com.visumit.businessboost.model.Product
 import com.visumit.businessboost.utils.UserPreferences
 import org.jetbrains.anko.toast
@@ -18,6 +21,7 @@ class ProductViewHolder(view: View) : RecyclerView.ViewHolder(view){
     private val textViewPriceDiscount = itemView.findViewById<TextView>(R.id.product_price_discount)
     private val btnAddProduct = itemView.findViewById<Button>(R.id.btn_add_product)
     private  val imageProduct: ImageView = itemView.findViewById(R.id.product_img)
+    private lateinit var database: CarrinhoDatabase
 
     fun bind(item: Product, context: Context) {
         if (item.imagesUrl != "" && item.imagesUrl != null){
@@ -41,8 +45,23 @@ class ProductViewHolder(view: View) : RecyclerView.ViewHolder(view){
             val preferences = UserPreferences()
             var token = preferences.getToken(context)
 
-            context.toast("Produto adicionado ao carrinho")
+            val carrinho = Carrinho(
+                idProduct = item.id.toInt(),
+                name = item.name.toString(),
+                quantidade = 1,
+                totalPrice = item.totalPrice.toDouble()
+            )
+
+            database = CarrinhoDatabase(context)
+            val idCarrinho = database.inserir(carrinho)
+            if(idCarrinho == -1L){
+                context.toast("Erro ao inserir o produto")
+            }else{
+                context.toast("Inseriu o produto, ID:  $idCarrinho")
+            }
+
         }
     }
+
 
 }

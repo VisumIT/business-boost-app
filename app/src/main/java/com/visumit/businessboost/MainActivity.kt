@@ -29,8 +29,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
-
         toolbar = findViewById(R.id.toolbar)
         toolbar.title = "Home"
         setSupportActionBar(toolbar)

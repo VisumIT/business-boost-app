@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:elevation="4dp"
+    android:layout_marginBottom="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="8dp">
+        <TextView
+            android:id="@+id/carrinho_item_nome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Nome do produto" />
+        <TextView
+            android:id="@+id/carrinho_item_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Preço unitario" />
+        <TextView
+            android:id="@+id/carrinho_item_quantidade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Quantidade" />
+
+        <TextView
+            android:id="@+id/carrinho_item_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Valor total dos itens" />
+    </LinearLayout>
+
+
+
+</com.google.android.material.card.MaterialCardView>
