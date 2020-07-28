@@ -1,12 +1,14 @@
 package com.visumit.businessboost.http
 
+import com.visumit.businessboost.utils.UserPreferences
 import okhttp3.*
 
 class HttpHelper {
 
-    private var IP_REQUEST : String = "10.0.2.2"
+    private var IP_REQUEST : String = "52.3.253.2"
 
     fun post(json: String, endpoint: String, auth: String?): Response? {
+
 
         val URl = "http://${IP_REQUEST}:8080/${endpoint}"
 
@@ -19,12 +21,10 @@ class HttpHelper {
 
         if (auth == null){
             val request = Request.Builder().url(URl).method("POST", body).build()
-            val response = client.newCall(request).execute()
-            return response
+            return client.newCall(request).execute()
         }else{
             val request = Request.Builder().url(URl).method("POST", body).addHeader("Authorization", auth).build()
-            val response = client.newCall(request).execute()
-            return response
+            return client.newCall(request).execute()
         }
 
     }

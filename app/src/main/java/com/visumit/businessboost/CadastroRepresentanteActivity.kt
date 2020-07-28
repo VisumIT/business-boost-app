@@ -1,5 +1,6 @@
 package com.visumit.businessboost
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,9 +10,8 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.google.gson.Gson
 import com.visumit.businessboost.http.HttpHelper
-import com.visumit.businessboost.model.Message
+import com.visumit.businessboost.model.*
 import com.visumit.businessboost.model.Number
-import com.visumit.businessboost.model.Representante
 import com.visumit.businessboost.utils.FormValidationUtil
 import com.visumit.businessboost.utils.Mask
 import org.jetbrains.anko.*
@@ -109,10 +109,58 @@ class CadastroRepresentanteActivity : AppCompatActivity() {
                     if (response != null) {
                         if(response.isSuccessful){
 
+                            var login = Login()
+                            login.email = editTextEmail.text.toString()
+                            login.password = editTextSenha01.text.toString()
+
+                            var loginJson = gson.toJson(login)
+                            var res = http.post(loginJson, "login", null)
+
+
+                            if (res != null) {
+                                if (res.code() == 200) {
+
+                                    println(res)
+                                    println(res.headers().toString())
+
+                                    val token = res.header("Authorization")
+
+                                    var sharedPref = getSharedPreferences("usuario", Context.MODE_PRIVATE)
+                                    var editor = sharedPref.edit()
+
+                                    editor.putString("token", token.toString())
+                                    editor.putString("email", login.email)
+                                    editor.putString("password", login.password)
+
+
+                                    val httpHelper = HttpHelper()
+                                    var res = httpHelper.get("representatives/whois", "$token")
+
+//                                    val gson = Gson()
+                                    var toOject = gson.fromJson(res.toString(), RepresentanteResponse::class.java)
+
+                                    editor.putString("id", toOject.id.toString())
+                                    editor.commit()
+
+                                    uiThread {
+
+                                        val selecionarEmpresa  = Intent(this@CadastroRepresentanteActivity, SelectCompanyActivity::class.java)
+                                        startActivity(selecionarEmpresa)
+                                    }
+                                }
+                            }else{
+                                uiThread {
+                                    toast("dados invalidos")
+                                }
+                            }
+
                             uiThread {
                                 toast("Cadastrado realizado com sucesso!")
-                                val selecionarEmpresa  = Intent(this@CadastroRepresentanteActivity, SelectCompanyActivity::class.java)
-                                startActivity(selecionarEmpresa)
+
+
+
+
+
 //                                overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_in_left)
 
                             }

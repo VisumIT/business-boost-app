@@ -2,6 +2,7 @@ package com.visumit.businessboost.utils
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.visumit.businessboost.http.HttpHelper
 
 class UserPreferences {
 
@@ -17,6 +18,13 @@ class UserPreferences {
 
         val preferences = context.getSharedPreferences("usuario", Context.MODE_PRIVATE)
         return preferences.getString("id", "")
+
+    }
+
+    fun getIdCompany(context: Context) : Int? {
+
+        val preferences = context.getSharedPreferences("usuario", Context.MODE_PRIVATE)
+        return preferences.getInt("ID_COMPANY", -1)
 
     }
 

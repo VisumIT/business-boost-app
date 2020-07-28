@@ -1,16 +1,14 @@
 package com.visumit.businessboost
 
-import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.view.View
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.visumit.businessboost.model.Company
-import com.visumit.businessboost.model.Product
-import java.lang.String.format
-import java.text.DecimalFormat
 
 class CompanyViewHolder(view: View) : RecyclerView.ViewHolder(view){
 
@@ -30,6 +28,14 @@ class CompanyViewHolder(view: View) : RecyclerView.ViewHolder(view){
         companyName.text = item.companyName
         companyCity.text = item.city
 
+        itemView.setOnClickListener {
+            Toast.makeText(itemView.context, "Empresa selecionada ${item.companyName}", Toast.LENGTH_SHORT).show()
+
+
+            val intent = Intent(itemView.context, MainActivity::class.java)
+            intent.putExtra("ID_COMPANY", item.id)
+            itemView.context.startActivity(intent)
+        }
 
 
     }
