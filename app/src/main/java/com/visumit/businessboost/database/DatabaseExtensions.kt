@@ -39,3 +39,8 @@ fun CarrinhoDatabase.listarProdutosCarrinho(): List<Carrinho>{
 
     return listProductsCarrinho
 }
+
+fun CarrinhoDatabase.deletaTodosItensCarrinho(){
+    val sql = "DELETE FROM TB_CARRINHO WHERE ID > 0"
+    writableDatabase.execSQL(sql)
+}

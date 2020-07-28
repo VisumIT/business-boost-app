@@ -57,7 +57,7 @@ class ProductViewHolder(view: View) : RecyclerView.ViewHolder(view){
             if(idCarrinho == -1L){
                 context.toast("Erro ao inserir o produto")
             }else{
-                context.toast("Inseriu o produto, ID:  $idCarrinho")
+//                context.toast("Inseriu o produto, ID:  $idCarrinho")
             }
 
         }

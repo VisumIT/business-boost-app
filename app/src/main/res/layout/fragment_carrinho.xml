@@ -1,19 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view_carrinho"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:listitem="@layout/item_carrinho"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp"
-        android:paddingTop="4dp"/>
+     <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:orientation="vertical"
+         android:descendantFocusability="blocksDescendants">
 
-</LinearLayout>
+
+         <androidx.recyclerview.widget.RecyclerView
+             android:id="@+id/recycler_view_carrinho"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:paddingLeft="8dp"
+             android:paddingTop="4dp"
+             android:paddingRight="8dp"
+             tools:listitem="@layout/item_carrinho" />
+
+         <TextView
+            android:id="@+id/preco_total_carrinho"
+            android:padding="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="end"
+            tools:text="Total R$ 1000.00"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <Button
+                android:id="@+id/limpar_carrinho"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="Limpar"
+                android:background="#E60000"
+                android:textColor="@color/colorWhite"
+                android:layout_alignParentLeft="true"/>
+
+            <Button
+                android:id="@+id/enviar_pedido"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:background="@color/colorGreen"
+                android:text="Enviar"
+                android:textColor="@color/colorWhite" />
+
+        </RelativeLayout>
+    </LinearLayout>
+</ScrollView>
