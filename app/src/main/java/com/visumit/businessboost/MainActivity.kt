@@ -115,6 +115,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 var intent = Intent(this, UploadImageActivity::class.java)
                 startActivity(intent)
             }
+            R.id.nav_carrinho -> {
+                toolbar.title = "Carrinho"
+                setSupportActionBar(toolbar)
+                supportFragmentManager.beginTransaction().replace(R.id.fragment_container, CarrinhoFragment()).commit()
+            }
         }
 
         toggle = ActionBarDrawerToggle(

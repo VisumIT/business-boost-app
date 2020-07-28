@@ -17,10 +17,16 @@ class CarrinhoViewHolder(view: View) : RecyclerView.ViewHolder(view){
     private val textViewName = itemView.findViewById<TextView>(R.id.carrinho_item_nome)
     private val textViewPrice = itemView.findViewById<TextView>(R.id.carrinho_item_price)
     private val textViewQuantity = itemView.findViewById<TextView>(R.id.carrinho_item_quantidade)
-    private val textViewPriceTotal = itemView.findViewById<Button>(R.id.carrinho_item_total)
+    private val textViewPriceTotal = itemView.findViewById<TextView>(R.id.carrinho_item_total)
 
     fun bind(item: Carrinho) {
+        textViewName.text = item.name.toString()
+        textViewPrice.text = item.totalPrice.toString()
+        textViewQuantity.text = item.quantidade.toString()
 
+
+        var totalPrice = item.totalPrice.toDouble() * item.quantidade.toDouble()
+        textViewPriceTotal.text = "R$ $totalPrice"
     }
 
 }
