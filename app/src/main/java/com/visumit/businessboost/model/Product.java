@@ -1,7 +1,7 @@
 package com.visumit.businessboost.model;
 
 public class Product {
-    private float id;
+    private int id;
     private String name;
     private float price;
     private float discount;
@@ -19,7 +19,7 @@ public class Product {
 
     // Getter Methods
 
-    public float getId() {
+    public int getId() {
         return id;
     }
 
@@ -77,7 +77,7 @@ public class Product {
 
     // Setter Methods
 
-    public void setId( float id ) {
+    public void setId( int id ) {
         this.id = id;
     }
 
@@ -134,7 +134,7 @@ public class Product {
     }
 }
 class ProductInformation {
-    private float id;
+    private int id;
     private float stock;
     private String size;
     private String color;
@@ -142,7 +142,7 @@ class ProductInformation {
 
     // Getter Methods
 
-    public float getId() {
+    public int getId() {
         return id;
     }
 
@@ -160,7 +160,7 @@ class ProductInformation {
 
     // Setter Methods
 
-    public void setId( float id ) {
+    public void setId( int id ) {
         this.id = id;
     }
 

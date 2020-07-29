@@ -2,6 +2,7 @@ package com.visumit.businessboost.database
 
 import android.content.ContentValues
 import com.visumit.businessboost.model.Carrinho
+import org.jetbrains.anko.db.update
 
 fun CarrinhoDatabase.inserir(item: Carrinho) : Long{
 
@@ -43,4 +44,14 @@ fun CarrinhoDatabase.listarProdutosCarrinho(): List<Carrinho>{
 fun CarrinhoDatabase.deletaTodosItensCarrinho(){
     val sql = "DELETE FROM TB_CARRINHO WHERE ID > 0"
     writableDatabase.execSQL(sql)
+}
+
+fun CarrinhoDatabase.atualizarQuantidade(carrinho: Carrinho): Int{
+
+    val valores = ContentValues().apply {
+        put("QUANTITY", carrinho.quantidade)
+    }
+
+    return writableDatabase.update("TB_CARRINHO", valores, "ID_PRODUCT=${carrinho.idProduct}", null)
+
 }
