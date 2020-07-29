@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,12 +16,15 @@ import com.visumit.businessboost.database.CarrinhoDatabase
 import com.visumit.businessboost.database.deletaTodosItensCarrinho
 import com.visumit.businessboost.database.listarProdutosCarrinho
 import com.visumit.businessboost.http.HttpHelper
+import com.visumit.businessboost.model.Carrinho
 import com.visumit.businessboost.model.Items
 import com.visumit.businessboost.model.Order
 import com.visumit.businessboost.utils.UserPreferences
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.support.v4.toast
 import org.jetbrains.anko.uiThread
+import java.text.DecimalFormat
+import java.text.NumberFormat
 
 class CarrinhoFragment : Fragment() {
 
@@ -29,7 +33,8 @@ class CarrinhoFragment : Fragment() {
     private val carrinhoAdapter = CarrinhoAdapter()
     private lateinit var database: CarrinhoDatabase
     private val preferences = UserPreferences()
-
+    private lateinit var textViewPriceCarrinho: TextView
+    private var totalCarrinho: Double = 0.0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,6 +48,7 @@ class CarrinhoFragment : Fragment() {
 
         buttonLimpar = view.findViewById(R.id.limpar_carrinho)
         buttonEnviar = view.findViewById(R.id.enviar_pedido)
+        textViewPriceCarrinho = view.findViewById(R.id.preco_total_carrinho)
 
         var recyclerView: RecyclerView = view.findViewById(R.id.recycler_view_carrinho)
         recyclerView.layoutManager = LinearLayoutManager(activity)
@@ -50,16 +56,20 @@ class CarrinhoFragment : Fragment() {
 
         database = CarrinhoDatabase(activity)
 
-        val carrinhoProdutos = database.listarProdutosCarrinho()
         var listProducts = database.listarProdutosCarrinho()
+        carrinhoAdapter.updateItems(listProducts)
 
-        carrinhoAdapter.updateItems(carrinhoProdutos)
+//      Calcular Total do carrinho
+        calcularCarrinho(listProducts)
+
 
         buttonLimpar.setOnClickListener {
             limparCarrinho()
+            calcularCarrinho(listProducts)
         }
 
         buttonEnviar.setOnClickListener {
+
             var listProducts = database.listarProdutosCarrinho()
 
             var listItems = mutableListOf<Items>()
@@ -92,6 +102,7 @@ class CarrinhoFragment : Fragment() {
                     uiThread {
                         toast("Pedido enviado com sucesso!")
                         limparCarrinho()
+                        calcularCarrinho(listProducts)
                     }
                 }
             }
@@ -99,14 +110,19 @@ class CarrinhoFragment : Fragment() {
 
         }
 
-
-
-
-
-
-
-
         return view
+    }
+
+    fun calcularCarrinho(array: List<Carrinho>){
+        var total = 0.0
+        for(i in array){
+            total += (i.totalPrice * i.quantidade)
+        }
+        if (total != 0.0){
+            textViewPriceCarrinho.text = "R$ " + String.format("%.2f", total)
+        }else{
+            textViewPriceCarrinho.text = ""
+        }
     }
 
     fun limparCarrinho(){

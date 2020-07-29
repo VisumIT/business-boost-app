@@ -21,12 +21,12 @@ class CarrinhoViewHolder(view: View) : RecyclerView.ViewHolder(view){
 
     fun bind(item: Carrinho) {
         textViewName.text = item.name.toString()
-        textViewPrice.text = item.totalPrice.toString()
-        textViewQuantity.text = item.quantidade.toString()
+        textViewPrice.text = "Preço Unitario R$ " + String.format("%.2f", item.totalPrice)
+        textViewQuantity.text = "Qt: " + item.quantidade.toString()
 
 
         var totalPrice = item.totalPrice.toDouble() * item.quantidade.toDouble()
-        textViewPriceTotal.text = "R$ $totalPrice"
+        textViewPriceTotal.text = "Preço total R$ " + String.format("%.2f", totalPrice)
     }
 
 }
