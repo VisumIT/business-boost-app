@@ -5,17 +5,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-     <LinearLayout
+     <RelativeLayout
          android:layout_width="match_parent"
          android:layout_height="match_parent"
          android:orientation="vertical"
          android:descendantFocusability="blocksDescendants">
 
+         <TextView
+             android:padding="32dp"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="Nenhum Produto no carrinho!"
+             android:textStyle="bold"
+             android:textSize="20sp"
+             android:layout_below="@+id/toolbar"/>
 
          <androidx.recyclerview.widget.RecyclerView
              android:id="@+id/recycler_view_carrinho"
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
+             android:layout_below="@+id/toolbar"
              android:paddingLeft="8dp"
              android:paddingTop="4dp"
              android:paddingRight="8dp"
@@ -23,7 +32,7 @@
 
          <TextView
             android:id="@+id/preco_total_carrinho"
-            android:padding="16dp"
+            android:padding="16dp" android:layout_below="@+id/recycler_view_carrinho"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:gravity="end"
@@ -32,7 +41,11 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp">
+            android:layout_below="@+id/preco_total_carrinho"
+            android:padding="16dp"
+            android:layout_marginTop="32dp" >
+
+
 
             <Button
                 android:id="@+id/limpar_carrinho"
@@ -53,5 +66,5 @@
                 android:textColor="@color/colorWhite" />
 
         </RelativeLayout>
-    </LinearLayout>
+    </RelativeLayout>
 </ScrollView>

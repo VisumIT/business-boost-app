@@ -14,17 +14,17 @@ class UserPreferences {
 
     }
 
-    fun getId(context: Context) : String? {
+    fun getId(context: Context) : Int {
 
         val preferences = context.getSharedPreferences("usuario", Context.MODE_PRIVATE)
-        return preferences.getString("id", "")
+        return preferences.getInt("id", -1)
 
     }
 
     fun getIdCompany(context: Context) : Int? {
 
         val preferences = context.getSharedPreferences("usuario", Context.MODE_PRIVATE)
-        return preferences.getInt("ID_COMPANY", -1)
+        return preferences.getInt("ID_COMPANY", 1)
 
     }
 
