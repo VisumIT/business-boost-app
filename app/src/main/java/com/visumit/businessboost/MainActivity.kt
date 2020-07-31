@@ -1,18 +1,21 @@
 package com.visumit.businessboost
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.Toast
+import android.widget.ImageView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
+import com.squareup.picasso.Picasso
 import com.visumit.businessboost.http.HttpHelper
 import com.visumit.businessboost.utils.UserPreferences
+import com.visumit.businessboost.utils.toBitmap
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.toast
 import org.jetbrains.anko.uiThread
@@ -25,18 +28,47 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     private var idCompany : Int? = null
 
+
+    @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+         var userPreferences = UserPreferences()
 
         toolbar = findViewById(R.id.toolbar)
         toolbar.title = "Home"
         setSupportActionBar(toolbar)
 
         drawer = findViewById(R.id.drawer_layout)
+        var imageViewPerfil = findViewById<ImageView>(R.id.imageViewNav)
+        var foto = userPreferences.getPhotograph(this)
+
 
         val navigationView: NavigationView = findViewById(R.id.nav_view)
         navigationView.setNavigationItemSelectedListener(this)
+
+//        var hView = navigationView.inflateHeaderView(R.id.nav_view)
+//        var imgVw = hView.findViewById<ImageView>(R.id.imageViewNav)
+//        var fotoNav = hView.findViewById<>()
+
+
+
+
+        doAsync {
+//            if (foto == ""){
+//                foto = R.drawable.ic_launcher_background.toString()
+//            }
+
+//            var urlFoto = toBitmap("https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQP03JO7SOMR_P_zpBMS_1kH72pneV25Rd8Vw&usqp=CAU")
+//            imgVw.setImageBitmap(urlFoto)
+
+//            foto = "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQP03JO7SOMR_P_zpBMS_1kH72pneV25Rd8Vw&usqp=CAU"
+//            Picasso.get().load(foto).into(imageViewPerfil)
+
+        }
+
+
 
         toggle = ActionBarDrawerToggle(
             this,
@@ -47,6 +79,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         )
         drawer.addDrawerListener(toggle)
         toggle.syncState()
+
+
 
         if (savedInstanceState == null){
             supportFragmentManager.beginTransaction().replace(R.id.fragment_container, HomeFragment()).commit()
@@ -109,7 +143,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 supportFragmentManager.beginTransaction().replace(R.id.fragment_container, ProductFragment()).commit()
             }
             R.id.nav_companies -> {
-                toast("Companies")
+                toolbar.title = "Selecione uma Empresa"
+                setSupportActionBar(toolbar)
+                supportFragmentManager.beginTransaction().replace(R.id.fragment_container, ParceriasFragment()).commit()
             }
             R.id.nav_image -> {
                 var intent = Intent(this, UploadImageActivity::class.java)

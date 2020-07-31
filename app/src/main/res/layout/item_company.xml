@@ -18,6 +18,7 @@
         <ImageView
             android:id="@+id/company_img"
             android:layout_width="128dp"
+            android:scaleType="fitCenter"
             android:layout_height="match_parent"
             tools:background="@color/colorCinza"
             android:layout_marginRight="16dp"/>

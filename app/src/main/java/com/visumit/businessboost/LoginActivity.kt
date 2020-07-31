@@ -78,6 +78,8 @@ class LoginActivity : AppCompatActivity(){
                             var toOject = gson.fromJson(res.toString(), RepresentanteResponse::class.java)
 
                             editor.putInt("id", toOject.id.toInt())
+                            editor.putString("photograph", toOject.photograph.toString())
+                            editor.putString("name", toOject.name.toString())
                             editor.commit()
 
                             uiThread {

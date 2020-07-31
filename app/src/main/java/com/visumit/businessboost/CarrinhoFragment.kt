@@ -65,7 +65,9 @@ class CarrinhoFragment : Fragment() {
 
         buttonLimpar.setOnClickListener {
             limparCarrinho()
+            textViewPriceCarrinho.text = ""
             calcularCarrinho(listProducts)
+
         }
 
         buttonEnviar.setOnClickListener {

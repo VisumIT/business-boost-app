@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.visumit.businessboost.model.Company
-import com.visumit.businessboost.model.Product
 
 class CompanyAdapter : RecyclerView.Adapter<CompanyViewHolder>() {
 

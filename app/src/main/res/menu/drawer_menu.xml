@@ -12,23 +12,28 @@
 
         <item
             android:id="@+id/nav_clients"
-            android:title="Clientes" />
+            android:title="Clientes"
+            android:icon="@drawable/ic_clientes"/>
 
         <item
             android:id="@+id/nav_products"
-            android:title="Produtos" />
+            android:title="Produtos"
+            android:icon="@drawable/ic_products"/>
 
         <item
             android:id="@+id/nav_carrinho"
-            android:title="Carrinho" />
+            android:title="Carrinho"
+            android:icon="@drawable/ic_shopping_cart_black_24dp"/>
 
         <item
             android:id="@+id/nav_orders"
-            android:title="Pedidos" />
+            android:title="Pedidos"
+            android:icon="@drawable/ic_orders"/>
 
         <item
             android:id="@+id/nav_companies"
-            android:title="Empresas" />
+            android:title="Empresas"
+            android:icon="@drawable/ic_business"/>
 
     </group>
 

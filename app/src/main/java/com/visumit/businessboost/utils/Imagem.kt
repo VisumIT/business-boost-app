@@ -1,8 +1,10 @@
 package com.visumit.businessboost.utils
 
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.util.Base64
 import java.io.ByteArrayOutputStream
+import java.net.URL
 
 fun bitmapToBase64(bitmap: Bitmap) : String {
 
@@ -13,4 +15,16 @@ fun bitmapToBase64(bitmap: Bitmap) : String {
     val imagemArray = byteArrayOutputStream.toByteArray()
 
     return Base64.encodeToString(imagemArray, Base64.NO_WRAP )
+}
+
+fun toBitmap(string: String): Bitmap{
+    var bitmap : Bitmap? = null
+    var url = emptyArray<String>()
+
+    var inputStream = URL(string).openStream()
+
+    bitmap = BitmapFactory.decodeStream(inputStream)
+
+    return bitmap
+
 }
