@@ -38,7 +38,7 @@ class ProductFragment : Fragment() {
         doAsync {
 
             var http = HttpHelper()
-            var res = http.get("company/1/products", token.toString())
+            var res = http.get("company/${userPreferences.getIdCompany(activity)}/products", token.toString())
 
             var listProducts = fromJsonArrayListProduct(res.toString())
 

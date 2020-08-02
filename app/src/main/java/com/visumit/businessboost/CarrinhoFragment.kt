@@ -19,6 +19,7 @@ import com.visumit.businessboost.http.HttpHelper
 import com.visumit.businessboost.model.Carrinho
 import com.visumit.businessboost.model.Items
 import com.visumit.businessboost.model.Order
+import com.visumit.businessboost.model.ProductCarrinho
 import com.visumit.businessboost.utils.UserPreferences
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.support.v4.toast
@@ -76,15 +77,15 @@ class CarrinhoFragment : Fragment() {
 
             var listItems = mutableListOf<Items>()
             for (item in listProducts){
+                var productCarrinho = ProductCarrinho(id = item.idProduct)
                 var items = Items(
-                    productId = item.idProduct.toInt(),
-                    quantity = item.quantidade.toInt()
+                    product = productCarrinho,
+                    quantity = item.quantidade
                 )
                 listItems.add(items)
             }
             println(preferences.getId(view.context))
             val orders = Order(
-                representativeId = preferences.getId(view.context),
                 clientId = 1,
                 dicountId = "0",
                 items = listItems
@@ -100,11 +101,13 @@ class CarrinhoFragment : Fragment() {
             println("******************* $endpoint")
             doAsync {
                 val res = httpHelper.post( orderGson , endpoint, preferences.getToken(view.context))
+                println("------------" + res?.body()?.string())
                 if(res?.code() == 201){
                     uiThread {
                         toast("Pedido enviado com sucesso!")
                         limparCarrinho()
                         calcularCarrinho(listProducts)
+                        textViewPriceCarrinho.text = ""
                     }
                 }
             }

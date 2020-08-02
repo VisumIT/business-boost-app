@@ -22,7 +22,7 @@ class UserPreferences {
     fun getIdCompany(context: Context) : Int? {
 
         val preferences = context.getSharedPreferences("usuario", Context.MODE_PRIVATE)
-        return preferences.getInt("ID_COMPANY", 1)
+        return preferences.getInt("ID_COMPANY", 2)
 
     }
 

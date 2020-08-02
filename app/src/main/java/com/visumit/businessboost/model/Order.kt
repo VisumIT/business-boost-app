@@ -1,8 +1,7 @@
 package com.visumit.businessboost.model
 
 data class Order (
-    private val representativeId: Int,
-    private val clientId: Int,
-    private val dicountId: String? = "",
-    private val items: List<Items>
+     val clientId: Int,
+     val dicountId: String? = "0",
+     val items: List<Items>?
 )

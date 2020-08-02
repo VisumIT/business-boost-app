@@ -34,12 +34,12 @@ class ProductViewHolder(view: View) : RecyclerView.ViewHolder(view){
             Picasso.get().load(R.mipmap.boost_icon)
         }
 
-        textViewPrice.text = "R$ " + item.price.toString()
+        textViewPrice.text = "R$ " + String.format("%.2f", item.price).replace(".", ",")
         textViewName.text = item.name.toString()
 
         // Aplicar o desconto no preço final
         var priceDiscount = item.price * (item.discount / 100 - 1) * -1
-        textViewPriceDiscount.text = "R$ " + priceDiscount.toString()
+        textViewPriceDiscount.text = "R$ " + String.format("%.2f", priceDiscount).replace(".", ",")
 
 
 
@@ -59,7 +59,8 @@ class ProductViewHolder(view: View) : RecyclerView.ViewHolder(view){
                 idProduct = item.id.toInt(),
                 name = item.name.toString(),
                 quantidade = 1,
-                totalPrice = item.totalPrice.toDouble()
+                totalPrice = item.totalPrice.toDouble(),
+                imgUrl = item.imagesUrl
             )
 
             var ref = true
@@ -69,7 +70,8 @@ class ProductViewHolder(view: View) : RecyclerView.ViewHolder(view){
                         idProduct = item.id,
                         name = item.name.toString(),
                         quantidade = elem.quantidade + 1,
-                        totalPrice = item.totalPrice.toDouble()
+                        totalPrice = item.totalPrice.toDouble(),
+                        imgUrl = item.imagesUrl
                     ))
                     ref = false
                     context.toast("Quantidade aumentada: ${elem.quantidade}!")

@@ -8,12 +8,15 @@ import android.widget.Button
 import android.widget.EditText
 import com.google.gson.Gson
 import com.visumit.businessboost.http.HttpHelper
+import com.visumit.businessboost.model.Email
 import com.visumit.businessboost.model.Login
 import com.visumit.businessboost.model.RepresentanteResponse
+import com.visumit.businessboost.model.ResponseWhoisRepresentantive
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.longToast
 import org.jetbrains.anko.toast
 import org.jetbrains.anko.uiThread
+import kotlin.reflect.typeOf
 
 class LoginActivity : AppCompatActivity(){
 
@@ -40,7 +43,7 @@ class LoginActivity : AppCompatActivity(){
 //            login.email = email.text.toString()
 //            login.password = password.text.toString()
 
-            login.email = "wesley@gmail.com"
+            login.email = "agatha@gmail.com"
             login.password = "123456789"
 
             if(login.email != "" && login.password != ""){
@@ -69,17 +72,19 @@ class LoginActivity : AppCompatActivity(){
                             editor.putString("password", login.password)
 
 
-                            val httpHelper = HttpHelper()
-                            var res = httpHelper.get("representatives/whois", "$token")
 
+                            val email = Email(email = login.email)
+                            var res = http.post(gson.toJson(email) ,"representatives/whois", "$token")
 
+                            println(res?.body()?.string())
+//                            var response = res?.body()?.string()
+                            var response = "{\"id\":1,\"name\":\"Agatha Daniela Vanessa Duarte\",\"email\":\"agatha@gmail.com\",\"photograph\":\"\"}"
+                            var toOject = gson.fromJson(response, ResponseWhoisRepresentantive::class.java)
 
-                            val gson = Gson()
-                            var toOject = gson.fromJson(res.toString(), RepresentanteResponse::class.java)
-
-                            editor.putInt("id", toOject.id.toInt())
+                            editor.putInt("id", toOject.id.toString().toInt())
                             editor.putString("photograph", toOject.photograph.toString())
                             editor.putString("name", toOject.name.toString())
+                            editor.putInt("ID_COMPANY", 2)
                             editor.commit()
 
                             uiThread {

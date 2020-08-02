@@ -5,8 +5,8 @@ import okhttp3.*
 
 class HttpHelper {
 
-    private var IP_REQUEST : String = "52.3.253.2"
-//    private var IP_REQUEST : String = "10.0.2.2"
+//    private var IP_REQUEST : String = "52.3.253.2"
+    private var IP_REQUEST : String = "10.0.2.2"
 
     fun post(json: String, endpoint: String, auth: String?): Response? {
 
