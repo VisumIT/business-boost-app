@@ -37,13 +37,5 @@
 
     </group>
 
-    <item android:title="Configuraçoes">
-        <menu>
-            <item
-                android:id="@+id/nav_image"
-                android:title="Alterar Imagem" />
-        </menu>
-    </item>
-
 
 </menu>

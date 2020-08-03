@@ -40,11 +40,11 @@ class LoginActivity : AppCompatActivity(){
         btnLogin.setOnClickListener {
 
             var login = Login()
-            login.email = email.text.toString()
-            login.password = password.text.toString()
+//            login.email = email.text.toString()
+//            login.password = password.text.toString()
 
-//            login.email = "agatha@gmail.com"
-//            login.password = "123456789"
+            login.email = "agatha@gmail.com"
+            login.password = "123456789"
 
             if(login.email != "" && login.password != ""){
 

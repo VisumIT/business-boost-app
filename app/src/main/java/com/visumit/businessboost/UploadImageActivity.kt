@@ -1,5 +1,6 @@
 package com.visumit.businessboost
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import androidx.appcompat.app.AppCompatActivity
@@ -93,7 +94,6 @@ class UploadImageActivity : AppCompatActivity() {
     fun enviarFoto(token: String?, id: String?) {
         val random = Random()
         val imagem = Imagem()
-//        imagem.fileName = (100000..100000000000).random().toString() + ".jpeg"
         imagem.fileName = "mobile.jpeg"
         imagem.mimetype = "image/jpeg"
         imagem.base64 = bitmapToBase64(imageFoto.drawable.toBitmap())
@@ -112,6 +112,12 @@ class UploadImageActivity : AppCompatActivity() {
 
                 uiThread {
                     toast("Imagem cadastrada com sucesso!")
+
+                    var sharedPref = getSharedPreferences("usuario", Context.MODE_PRIVATE)
+                    var editor = sharedPref.edit()
+                    editor.putString("photograph", toObjectImageUrl.imageUrl)
+                    editor.commit()
+
                     val intent = Intent(this@UploadImageActivity , MainActivity::class.java)
                     startActivity(intent)
                 }

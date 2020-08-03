@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -26,10 +27,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private lateinit var drawer: DrawerLayout
     private lateinit var toolbar: Toolbar
     private lateinit var toggle: ActionBarDrawerToggle
-    private lateinit var textViewEmail: TextView
-
-
+    var userPreferences = UserPreferences()
     private var idCompany : Int? = null
+    private lateinit var imgFoto: ImageButton
 
 
     @SuppressLint("ResourceType")
@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-         var userPreferences = UserPreferences()
+
 
         toolbar = findViewById(R.id.toolbar)
         toolbar.title = "Home"
@@ -53,7 +53,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         var txtEmail = hView.findViewById<TextView>(R.id.txt_email_nav)
         var txtNome = hView.findViewById<TextView>(R.id.txt_nome_nav)
-        var imgFoto = hView.findViewById<ImageView>(R.id.img_foto_nav)
+        imgFoto = hView.findViewById<ImageButton>(R.id.img_foto_nav)
+
+        imgFoto.setOnClickListener {
+            var intent = Intent(this, UploadImageActivity::class.java)
+            startActivity(intent)
+        }
 
         txtEmail.text = userPreferences.getEmail(this).toString()
         txtNome.text = userPreferences.getName(this).toString()
@@ -64,10 +69,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 //            .resize(50, 50)
 //            .into(imgFoto)
 
-        Glide.with(this)
-            .load(userPreferences.getPhotograph(this))
-            .circleCrop()
-            .into(imgFoto)
+//        Glide.with(this)
+//            .load(userPreferences.getPhotograph(this))
+//            .circleCrop()
+//            .into(imgFoto)
 
         toggle = ActionBarDrawerToggle(
             this,
@@ -115,6 +120,23 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        var fotoUrl = userPreferences.getPhotograph(this)
+        if (fotoUrl != null && fotoUrl != ""){
+            Glide.with(this)
+                .load(userPreferences.getPhotograph(this))
+                .circleCrop()
+                .into(imgFoto)
+        }else{
+            Glide.with(this)
+                .load(R.drawable.perfil)
+                .circleCrop()
+                .into(imgFoto)
+        }
+
+    }
+
     override fun onBackPressed() {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START)
@@ -141,10 +163,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 toolbar.title = "Parcerias"
                 setSupportActionBar(toolbar)
                 supportFragmentManager.beginTransaction().replace(R.id.fragment_container, ParceriasFragment()).commit()
-            }
-            R.id.nav_image -> {
-                var intent = Intent(this, UploadImageActivity::class.java)
-                startActivity(intent)
             }
             R.id.nav_carrinho -> {
                 toolbar.title = "Carrinho"
