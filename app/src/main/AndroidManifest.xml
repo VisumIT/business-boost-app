@@ -12,7 +12,14 @@
         android:roundIcon="@color/colorPrimary"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CarrinhoFragment"></activity>
+        <activity android:name=".ConfirmadoActivity"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity android:name=".CarrinhoFragment" />
         <activity
             android:name=".LoginActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -28,14 +35,14 @@
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".CadastroRepresentanteActivity"></meta-data>
+                android:value=".CadastroRepresentanteActivity" />
         </activity>
         <activity
             android:name=".ProductsActivity"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity"></meta-data>
+                android:value=".MainActivity" />
         </activity>
         <activity
             android:name=".MainActivity"

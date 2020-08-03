@@ -11,6 +11,7 @@ fun CarrinhoDatabase.inserir(item: Carrinho) : Long{
         put("ID_PRODUCT", item.idProduct)
         put("QUANTITY", item.quantidade)
         put("TOTAL_PRICE", item.totalPrice)
+        put("IMG_URL", item.imgUrl)
     })
 
     return idCarrinho
@@ -30,7 +31,8 @@ fun CarrinhoDatabase.listarProdutosCarrinho(): List<Carrinho>{
                 idProduct = cursor.getInt(cursor.getColumnIndex("ID_PRODUCT")),
                 name = cursor.getString(cursor.getColumnIndex("NAME")),
                 quantidade = cursor.getInt(cursor.getColumnIndex("QUANTITY")),
-                totalPrice = cursor.getDouble(cursor.getColumnIndex("TOTAL_PRICE"))
+                totalPrice = cursor.getDouble(cursor.getColumnIndex("TOTAL_PRICE")),
+                imgUrl = cursor.getString(cursor.getColumnIndex("IMG_URL"))
             )
 
             listProductsCarrinho.add(carrinho)

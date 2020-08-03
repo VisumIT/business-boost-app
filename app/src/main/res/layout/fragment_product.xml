@@ -14,6 +14,7 @@
         tools:listitem="@layout/item_product"
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
-        android:paddingTop="4dp"/>
+        android:paddingTop="4dp"
+        android:layout_marginBottom="38dp"/>
 
 </LinearLayout>

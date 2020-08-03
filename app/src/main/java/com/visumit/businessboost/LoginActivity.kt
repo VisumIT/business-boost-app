@@ -40,11 +40,11 @@ class LoginActivity : AppCompatActivity(){
         btnLogin.setOnClickListener {
 
             var login = Login()
-//            login.email = email.text.toString()
-//            login.password = password.text.toString()
+            login.email = email.text.toString()
+            login.password = password.text.toString()
 
-            login.email = "agatha@gmail.com"
-            login.password = "123456789"
+//            login.email = "agatha@gmail.com"
+//            login.password = "123456789"
 
             if(login.email != "" && login.password != ""){
 
@@ -76,24 +76,19 @@ class LoginActivity : AppCompatActivity(){
                             val email = Email(email = login.email)
                             var res = http.post(gson.toJson(email) ,"representatives/whois", "$token")
 
-                            println(res?.body()?.string())
-//                            var response = res?.body()?.string()
-                            var response = "{\"id\":1,\"name\":\"Agatha Daniela Vanessa Duarte\",\"email\":\"agatha@gmail.com\",\"photograph\":\"\"}"
-                            var toOject = gson.fromJson(response, ResponseWhoisRepresentantive::class.java)
+                            val responseBody = res?.body()
+                            var dados = responseBody?.string()
+                            var toOject = gson.fromJson(dados, ResponseWhoisRepresentantive::class.java)
 
                             editor.putInt("id", toOject.id.toString().toInt())
-                            editor.putString("photograph", toOject.photograph.toString())
+                            editor.putString("photograph", toOject.photograph)
                             editor.putString("name", toOject.name.toString())
                             editor.putInt("ID_COMPANY", 2)
                             editor.commit()
 
                             uiThread {
-
-
                                 val abrirApp = Intent(this@LoginActivity, MainActivity::class.java)
-//                                val abrirApp = Intent(this@MainActivity, ProductsActivity::class.java)
                                 startActivity(abrirApp)
-//                                overridePendingTransition(android.R.anim.slide_out_right, android.R.anim.slide_in_left)
                             }
                         }
                     }else{
@@ -102,11 +97,7 @@ class LoginActivity : AppCompatActivity(){
                         }
                     }
                 }
-
-
-
             }else{
-
                 toast("Digite seu email e senha!")
             }
         }

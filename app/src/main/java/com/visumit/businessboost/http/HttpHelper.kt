@@ -2,6 +2,7 @@ package com.visumit.businessboost.http
 
 import com.visumit.businessboost.utils.UserPreferences
 import okhttp3.*
+import java.util.concurrent.TimeUnit
 
 class HttpHelper {
 
@@ -15,7 +16,11 @@ class HttpHelper {
 
         val headerHttp = MediaType.parse("application/json; charset=utf-8")
 
-        val client = OkHttpClient()
+        val client = OkHttpClient.Builder().apply {
+            readTimeout(20, TimeUnit.SECONDS)
+            writeTimeout(20, TimeUnit.SECONDS)
+            connectTimeout(20, TimeUnit.SECONDS)
+        }.build()
 
         val body = RequestBody.create(headerHttp, json)
 

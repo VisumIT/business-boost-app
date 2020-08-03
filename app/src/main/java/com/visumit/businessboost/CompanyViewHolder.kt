@@ -18,7 +18,6 @@ class CompanyViewHolder(view: View) : RecyclerView.ViewHolder(view){
     private val companyCity = itemView.findViewById<TextView>(R.id.company_city)
     private val imageCompany : ImageView = itemView.findViewById(R.id.company_img)
 
-    @SuppressLint("ResourceAsColor")
     fun bind(item: Company) {
         if (item.logo != "" && item.logo != null){
             Picasso.get().load(item.logo).into(imageCompany)
@@ -29,7 +28,6 @@ class CompanyViewHolder(view: View) : RecyclerView.ViewHolder(view){
 //        println(item.logo.toString())
         if (item.id == 2){
             println("acchou")
-            itemView.setBackgroundColor(R.color.colorGreen)
         }
 
         companyName.text = item.companyName

@@ -1,6 +1,7 @@
 package com.visumit.businessboost
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -66,7 +67,7 @@ class CarrinhoFragment : Fragment() {
 
         buttonLimpar.setOnClickListener {
             limparCarrinho()
-            textViewPriceCarrinho.text = ""
+            listProducts = database.listarProdutosCarrinho()
             calcularCarrinho(listProducts)
 
         }
@@ -104,10 +105,15 @@ class CarrinhoFragment : Fragment() {
                 println("------------" + res?.body()?.string())
                 if(res?.code() == 201){
                     uiThread {
-                        toast("Pedido enviado com sucesso!")
+//                        toast("Pedido enviado com sucesso!")
                         limparCarrinho()
-                        calcularCarrinho(listProducts)
-                        textViewPriceCarrinho.text = ""
+//                        calcularCarrinho(listProducts)
+//                        textViewPriceCarrinho.text = ""
+
+//                        val fragment = Fragment().activity
+
+                        var intent = Intent(view.context, ConfirmadoActivity::class.java)
+                        startActivity(intent)
                     }
                 }
             }
@@ -124,7 +130,7 @@ class CarrinhoFragment : Fragment() {
             total += (i.totalPrice * i.quantidade)
         }
         if (total != 0.0){
-            textViewPriceCarrinho.text = "R$ " + String.format("%.2f", total)
+            textViewPriceCarrinho.text = "Total: R$ " + String.format("%.2f", total).replace(".", ",")
         }else{
             textViewPriceCarrinho.text = ""
         }

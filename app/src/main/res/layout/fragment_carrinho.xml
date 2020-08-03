@@ -28,13 +28,16 @@
              android:paddingLeft="8dp"
              android:paddingTop="4dp"
              android:paddingRight="8dp"
-             tools:listitem="@layout/item_carrinho" />
+             tools:listitem="@layout/item_carrinho"
+             />
 
          <TextView
             android:id="@+id/preco_total_carrinho"
             android:padding="16dp" android:layout_below="@+id/recycler_view_carrinho"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+             android:textSize="20sp"
+             android:textStyle="bold"
+            android:layout_height="wrap_content"
             android:gravity="end"
             tools:text="Total R$ 1000.00"/>
 
